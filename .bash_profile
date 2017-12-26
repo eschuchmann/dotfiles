@@ -13,7 +13,7 @@ export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
 # Custom $PATH with extra locations.
-export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:/usr/local/git/bin
+export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:/usr/local/git/bin:$PATH
 
 # Include alias file (if present) containing aliases for ssh, etc.
 if [ -f ~/.bash_aliases ]
