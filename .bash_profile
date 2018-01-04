@@ -68,3 +68,9 @@ function denter() {
   return 0
 }
 
+function aws_profile() {
+  export AWS_PROFILE="$1"
+}
+
+# set msh as default aws profile
+aws_profile msh
