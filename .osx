@@ -61,6 +61,11 @@ if [[ "$RUN_AS_ROOT" = true ]]; then
   systemsetup -setrestartfreeze on
 fi
 
+# Disable Notification Center
+launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+# To re-enable, run:
+# launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist && open /System/Library/CoreServices/NotificationCenter.app/
+
 # Disable game center. Who uses that thing?
 launchctl unload /System/Library/LaunchAgents/com.apple.gamed.plist 2> /dev/null
 
@@ -258,7 +263,7 @@ defaults write com.apple.dock expose-animation-duration -float 0.15
 # defaults write com.apple.dock expose-group-by-app -bool false
 
 # Remove the auto-hiding Dock delay
-# defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-delay -float 0
 # Remove the animation when hiding/showing the Dock
 # defaults write com.apple.dock autohide-time-modifier -float 0
 
