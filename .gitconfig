@@ -1,5 +1,6 @@
 [user]
-  name = Erik Schuchmann
+	name = Erik Schuchmann
+	email = eschuchmann@ojolabs.com
 [core]
   editor = vi
   excludesfile = ~/.gitignore
@@ -31,3 +32,7 @@
   path = ~/personal/gitconfig
 [includeIf "gitdir:~/msh/"]
   path = ~/msh/gitconfig
+[submodule]
+	recurse = true
+[advice]
+	detachedHead = false

@@ -54,23 +54,33 @@ if [ -f /usr/local/bin/rbenv ]; then
   eval "$(rbenv init -)"
 fi
 
-# Python settings.
-export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
-
-# Enter a running Docker container.
-function denter() {
-  if [[ ! "$1" ]] ; then
-      echo "You must supply a container ID or name."
-      return 0
-  fi
-
-  docker exec -it $1 bash
-  return 0
-}
-
 function aws_profile() {
   export AWS_PROFILE="$1"
 }
 
-# set msh as default aws profile
-aws_profile msh
+# pyenv support
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+# conda support
+. /usr/local/miniconda2/etc/profile.d/conda.sh
+
+source ~/.ojo_profile
+
+# Setting PATH for Python 3.6
+# The original version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
+export PATH
+ 
+## aws gsuite setup
+export GOOGLE_USERNAME="eschuchmann@ojolabs.com"
+export GOOGLE_IDP_ID="C032y2prw"
+export GOOGLE_SP_ID="990755105269"
+export DURATION="43200"
+alias aws-auth='unset AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID AWS_PROFILE; aws-google-auth -p aws-tmp; export AWS_PROFILE=aws-tmp'
+
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
